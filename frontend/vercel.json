@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/api/:path*",
-            "destination": "https://retailo.onrender.com/api/:path*"
+            "destination": "https://retailo-iy85.onrender.com/api/:path*"
         },
         {
             "source": "/(.*)",
