@@ -1,0 +1,182 @@
+# Retail Sales Management System
+
+## Overview
+
+A full-stack web application for managing and analyzing retail sales data. The system provides advanced search, filtering, sorting, and pagination capabilities to efficiently navigate large sales datasets. Built with React for the frontend and Express.js for the backend, following clean architecture principles and modern development practices.
+
+## Tech Stack
+
+### Backend
+
+- Node.js
+- Express.js
+- csv-parser
+
+### Frontend
+
+- React 18
+- Vite
+- Axios
+- CSS3
+
+## Search Implementation Summary
+
+The search functionality performs case-insensitive, full-text search across **Customer Name** and **Phone Number** fields. The search is implemented in the backend `dataService.js` using JavaScript's `toLowerCase()` and `includes()` methods. Search works seamlessly with filters, sorting, and pagination - it's applied first to the dataset, then filters are applied, followed by sorting and pagination. The search term is passed as a query parameter and processed on every request.
+
+## Filter Implementation Summary
+
+Multi-select filtering is implemented for **Customer Region**, **Gender**, **Product Category**, **Tags**, and **Payment Method**. Range-based filtering is used for **Age Range** (min/max) and **Date Range** (start/end). Filters are applied sequentially in the backend, with each filter narrowing down the dataset. Multiple filters can be combined, and all active filters are preserved when sorting or changing pages. Filter options are dynamically extracted from the dataset and provided via a dedicated API endpoint. The frontend maintains filter state and sends all active filters as query parameters.
+
+## Sorting Implementation Summary
+
+Sorting is implemented for three fields: **Date** (newest/oldest first), **Quantity** (high to low / low to high), and **Customer Name** (A-Z / Z-A). The sorting logic handles different data types appropriately - dates are converted to Date objects, quantities are parsed as integers, and names are compared using locale-aware string comparison. Sorting is applied after search and filtering but before pagination, ensuring consistent results across pages. The sort field and order are configurable via query parameters.
+
+## Pagination Implementation Summary
+
+Pagination is implemented with a default page size of **10 items per page**. The backend calculates total pages, current page, and navigation flags (hasNextPage, hasPreviousPage) based on the filtered dataset size. Pagination metadata is included in every API response. The frontend provides Previous/Next navigation buttons and displays current page information. All active search, filter, and sort states are preserved when navigating between pages. Pagination is applied last in the data processing pipeline, after search, filtering, and sorting.
+
+## Setup Instructions
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- CSV dataset file: `truestate_assignment_dataset.csv` in the root directory
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+
+```bash
+cd backend
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Ensure the CSV file `truestate_assignment_dataset.csv` is in the root directory (one level up from `backend/`)
+
+4. Start the backend server:
+
+```bash
+npm start
+```
+
+For development with auto-reload:
+
+```bash
+npm run dev
+```
+
+The backend server will run on `http://localhost:3001`
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+The frontend application will run on `http://localhost:3000`
+
+4. For production build:
+
+```bash
+npm run build
+```
+
+### Running the Complete Application
+
+1. Start the backend server first (in one terminal):
+
+```bash
+cd backend
+npm start
+```
+
+2. Start the frontend server (in another terminal):
+
+```bash
+cd frontend
+npm run dev
+```
+
+3. Open your browser and navigate to `http://localhost:3000`
+
+## Project Structure
+
+```
+root/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── services/
+│   │   ├── routes/
+│   │   └── index.js
+│   └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── styles/
+│   └── package.json
+├── docs/
+│   └── architecture.md
+├── truestate_assignment_dataset.csv
+└── README.md
+```
+
+## API Endpoints
+
+### GET /api/sales
+
+Fetch sales data with search, filters, sorting, and pagination.
+
+**Query Parameters:**
+
+- `search`: Search term for customer name or phone number
+- `regions`: Customer regions (array or comma-separated)
+- `genders`: Genders (array or comma-separated)
+- `ageMin`: Minimum age
+- `ageMax`: Maximum age
+- `categories`: Product categories (array or comma-separated)
+- `tags`: Tags (array or comma-separated)
+- `paymentMethods`: Payment methods (array or comma-separated)
+- `dateStart`: Start date (YYYY-MM-DD)
+- `dateEnd`: End date (YYYY-MM-DD)
+- `sortBy`: Sort field (date, quantity, customerName)
+- `sortOrder`: Sort order (asc, desc)
+- `page`: Page number (default: 1)
+- `pageSize`: Items per page (default: 10)
+
+### GET /api/sales/filters
+
+Get available filter options (regions, genders, categories, tags, payment methods, age range, date range).
+
+## Features
+
+- ✅ Full-text search (Customer Name, Phone Number)
+- ✅ Multi-select filters (Region, Gender, Category, Tags, Payment Method)
+- ✅ Range filters (Age, Date)
+- ✅ Sorting (Date, Quantity, Customer Name)
+- ✅ Pagination (10 items per page)
+- ✅ Summary statistics (Total units, Total amount, Total discount)
+- ✅ Responsive design
+- ✅ Clean, maintainable code structure
