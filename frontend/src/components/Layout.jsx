@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
           <div className="user-info">
             <div className="profile-image">
               <img
-                src="https://ui-avatars.com/api/?name=Bikash+Boro&background=4a90e2&color=fff&size=128&bold=true"
+                src="https://ui-avatars.com/api/?name=Bishal+Boro&background=4a90e2&color=fff&size=128&bold=true"
                 alt="Profile"
                 onError={(e) => {
                   e.target.style.display = 'none';
@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
               <div className="profile-fallback">BB</div>
             </div>
             <div className="user-details">
-              <span className="user-name">Bikash Boro</span>
+              <span className="user-name">Bishal Boro</span>
               <span className="dropdown-arrow">▼</span>
             </div>
           </div>

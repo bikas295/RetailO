@@ -17,7 +17,7 @@ This guide covers deploying the Retail Sales Management System with:
 
 ### 1. Update Git Remote (if needed)
 
-The repository currently points to `https://github.com/prasomjain/Retailo.git`. You'll want to update this to your own GitHub repository.
+The repository currently points to `https://github.com/bishalboro/Retailo.git`. You'll want to update this to your own GitHub repository.
 
 ```bash
 # Remove the old remote
